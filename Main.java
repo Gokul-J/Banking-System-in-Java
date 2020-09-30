@@ -36,11 +36,47 @@ public class Main{
       }
     }
     user = new User(name, bal, pin, ph);
-    Cont();
+    enterBanking();
+  }
+
+  public static void enterBanking(){
+    System.out.print("Enter Banking? Y/N : ");
+    String cont = sc.nextLine().trim().toLowerCase();
+    if(cont.length()>1){
+      System.out.println("Invalid Input");
+      enterBanking();
+    }
+    char c = cont.charAt(0);
+    if(c=='y'){
+      boolean validPin = false;
+      String pin = null;
+      while(!validPin){
+        System.out.print("Enter a four digit pin : ");
+        pin = sc.nextLine();
+        validPin = pin.matches("^[0-9]{4}$");
+        if(!validPin){
+          System.out.println("Invalid Pin!!");
+        }
+      }
+      if(pin.equals(user.getPin())){
+        banking();
+      }
+      else{
+        System.out.println("Authentication failed.");
+        System.exit(0);
+      }
+    }
+    else if(c=='n'){
+      System.out.println("Thank You...");
+    }
+    else{
+      System.out.println("Invalid Input");
+      enterBanking();
+    }
   }
 
   public static void Cont(){
-    System.out.print("Continue banking? Y/N");
+    System.out.print("Continue banking? Y/N : ");
     String cont = sc.nextLine().trim().toLowerCase();
     if(cont.length()>1){
       System.out.println("Invalid Input");
@@ -85,21 +121,6 @@ public class Main{
         System.out.println("Please select an valid option.");
         banking();
     }
-    // System.out.print("Continue banking? Y/N");
-    // String cont = sc.nextLine().trim().toLowerCase();
-    // if(cont.length()>1){
-    //   System.out.println("Invalid Input");
-    // }
-    // char c = cont.charAt(0);
-    // if(c=='y'){
-    //   banking();
-    // }
-    // else if(c=='n'){
-    //   System.out.println("Thank You...");
-    // }
-    // else{
-    //   System.out.println("Invalid Input");
-    // }
     Cont();
   }
 
