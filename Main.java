@@ -128,21 +128,22 @@ public class Main{
     System.out.print("Enter the amount to withdraw : ");
     int wd = sc.nextInt();
     sc.nextLine();
-    if(wd%100!=0){
+    if(wd == 0){
+      System.out.println("Amount should not be zero.");
+    }
+    else if(wd>user.getBalance()){
+      System.out.println("Insufficient Balance...");
+      banking();
+    }
+    else if(wd%100!=0){
       System.out.println("Please enter amount in multiples of 100.");
       withdraw();
     }
     else{
       int bal = user.getBalance();
-      if(wd>bal){
-        System.out.println("Insufficient Balance...");
-        banking();
-      }
-      else{
-        bal-=wd;
-        user.setBalance(bal);
-        System.out.println("Account Balance : "+user.getBalance());
-      }
+      bal-=wd;
+      user.setBalance(bal);
+      System.out.println("Account Balance : "+user.getBalance());
     }
   }
 
@@ -150,7 +151,10 @@ public class Main{
     System.out.print("Enter the amount to deposit : ");
     int dp = sc.nextInt();
     sc.nextLine();
-    if(dp%100!=0){
+    if(dp == 0){
+      System.out.println("Amount should not be zero.");
+    }
+    else if(dp%100!=0){
       System.out.println("Please enter amount in multiples of 100.");
       deposit();
     }
