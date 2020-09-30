@@ -10,33 +10,39 @@ public class Main{
   }
 
   public static void createAccount(){
-    System.out.print("Creating new Account...\nEnter your Name : ");
-    String name = sc.nextLine();
-    System.out.print("Enter the amount to be deposited : ");
-    int bal = sc.nextInt();
-    sc.nextLine();
-    boolean validPh = false;
-    String ph = null;
-    while(!validPh){
-      System.out.print("Enter your mobile no. : ");
-      ph = sc.nextLine().trim();
-      validPh = ph.matches("^[0-9]{10}$");
-      if(!validPh){
-        System.out.println("Invalid mobile no.");
+    try{
+      System.out.print("Creating new Account...\nEnter your Name : ");
+      String name = sc.nextLine();
+      System.out.print("Enter the amount to be deposited : ");
+      int bal = sc.nextInt();
+      sc.nextLine();
+      boolean validPh = false;
+      String ph = null;
+      while(!validPh){
+        System.out.print("Enter your mobile no. : ");
+        ph = sc.nextLine().trim();
+        validPh = ph.matches("^[0-9]{10}$");
+        if(!validPh){
+          System.out.println("Invalid mobile no.");
+        }
       }
-    }
-    boolean validPin = false;
-    String pin = null;
-    while(!validPin){
-      System.out.print("Enter a four digit pin : ");
-      pin = sc.nextLine();
-      validPin = pin.matches("^[0-9]{4}$");
-      if(!validPin){
-        System.out.println("Invalid Pin!!");
+      boolean validPin = false;
+      String pin = null;
+      while(!validPin){
+        System.out.print("Enter a four digit pin : ");
+        pin = sc.nextLine();
+        validPin = pin.matches("^[0-9]{4}$");
+        if(!validPin){
+          System.out.println("Invalid Pin!!");
+        }
       }
+      user = new User(name, bal, pin, ph);
+      enterBanking();
     }
-    user = new User(name, bal, pin, ph);
-    enterBanking();
+    catch(Exception e){
+      System.out.println("Invalid Credentials.");
+      System.exit(0);
+    }
   }
 
   public static void enterBanking(){
@@ -76,32 +82,38 @@ public class Main{
   }
 
   public static void banking(){
-    System.out.println("Select an Option :");
-    System.out.println("1. View Balance\n2. Withdraw\n3. Deposit\n4. Change Pin\n5. Exit");
-    int op = sc.nextInt();
-    sc.nextLine();
-    switch(op){
-      case 1 :
-        System.out.println(user.getBalance());
-        break;
-      case 2 :
-        withdraw();
-        break;
-      case 3:
-        deposit();
-        break;
-      case 4:
-        changePin();
-        break;
-      case 5 :
-        System.out.println("Thank you...");
-        System.exit(0);
-        break;
-      default :
-        System.out.println("Please select an valid option.");
-        banking();
+    try{
+      System.out.println("Select an Option :");
+      System.out.println("1. View Balance\n2. Withdraw\n3. Deposit\n4. Change Pin\n5. Exit");
+      int op = sc.nextInt();
+      sc.nextLine();
+      switch(op){
+        case 1 :
+          System.out.println(user.getBalance());
+          break;
+        case 2 :
+          withdraw();
+          break;
+        case 3:
+          deposit();
+          break;
+        case 4:
+          changePin();
+          break;
+        case 5 :
+          System.out.println("Thank you...");
+          System.exit(0);
+          break;
+        default :
+          System.out.println("Please select an valid option.");
+          banking();
+      }
+      Cont();
     }
-    Cont();
+    catch(Exception e){
+      System.out.println("Invalid Credentials.");
+      System.exit(0);
+    }
   }
 
   public static void withdraw(){
