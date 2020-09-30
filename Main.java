@@ -75,26 +75,6 @@ public class Main{
     }
   }
 
-  public static void Cont(){
-    System.out.print("Continue banking? Y/N : ");
-    String cont = sc.nextLine().trim().toLowerCase();
-    if(cont.length()>1){
-      System.out.println("Invalid Input");
-      Cont();
-    }
-    char c = cont.charAt(0);
-    if(c=='y'){
-      banking();
-    }
-    else if(c=='n'){
-      System.out.println("Thank You...");
-    }
-    else{
-      System.out.println("Invalid Input");
-      Cont();
-    }
-  } 
-
   public static void banking(){
     System.out.println("Select an Option :");
     System.out.println("1. View Balance\n2. Withdraw\n3. Deposit\n4. Change Pin\n5. Exit");
@@ -130,6 +110,7 @@ public class Main{
     sc.nextLine();
     if(wd == 0){
       System.out.println("Amount should not be zero.");
+      withdraw();
     }
     else if(wd>user.getBalance()){
       System.out.println("Insufficient Balance...");
@@ -153,6 +134,7 @@ public class Main{
     sc.nextLine();
     if(dp == 0){
       System.out.println("Amount should not be zero.");
+      deposit();
     }
     else if(dp%100!=0){
       System.out.println("Please enter amount in multiples of 100.");
@@ -188,4 +170,24 @@ public class Main{
       System.exit(0);
     }
   }
+
+  public static void Cont(){
+    System.out.print("Continue banking? Y/N : ");
+    String cont = sc.nextLine().trim().toLowerCase();
+    if(cont.length()>1){
+      System.out.println("Invalid Input");
+      Cont();
+    }
+    char c = cont.charAt(0);
+    if(c=='y'){
+      banking();
+    }
+    else if(c=='n'){
+      System.out.println("Thank You...");
+    }
+    else{
+      System.out.println("Invalid Input");
+      Cont();
+    }
+  } 
 }
