@@ -36,12 +36,34 @@ public class Main{
       }
     }
     user = new User(name, bal, pin, ph);
+    Cont();
   }
+
+  public static void Cont(){
+    System.out.print("Continue banking? Y/N");
+    String cont = sc.nextLine().trim().toLowerCase();
+    if(cont.length()>1){
+      System.out.println("Invalid Input");
+      Cont();
+    }
+    char c = cont.charAt(0);
+    if(c=='y'){
+      banking();
+    }
+    else if(c=='n'){
+      System.out.println("Thank You...");
+    }
+    else{
+      System.out.println("Invalid Input");
+      Cont();
+    }
+  } 
 
   public static void banking(){
     System.out.println("Select an Option :");
     System.out.println("1. View Balance\n2. Withdraw\n3. Deposit\n4. Change Pin\n5. Exit");
     int op = sc.nextInt();
+    sc.nextLine();
     switch(op){
       case 1 :
         System.out.println(user.getBalance());
@@ -63,27 +85,28 @@ public class Main{
         System.out.println("Please select an valid option.");
         banking();
     }
-    sc.nextLine();
-    System.out.print("Continue banking? Y/N");
-    String cont = sc.nextLine().trim().toLowerCase();
-    if(cont.length()>1){
-      System.out.println("Invalid Input");
-    }
-    char c = cont.charAt(0);
-    if(c=='y'){
-      banking();
-    }
-    else if(c=='n'){
-      System.out.println("Thank You...");
-    }
-    else{
-      System.out.println("Invalid Input");
-    }
+    // System.out.print("Continue banking? Y/N");
+    // String cont = sc.nextLine().trim().toLowerCase();
+    // if(cont.length()>1){
+    //   System.out.println("Invalid Input");
+    // }
+    // char c = cont.charAt(0);
+    // if(c=='y'){
+    //   banking();
+    // }
+    // else if(c=='n'){
+    //   System.out.println("Thank You...");
+    // }
+    // else{
+    //   System.out.println("Invalid Input");
+    // }
+    Cont();
   }
 
   public static void withdraw(){
     System.out.print("Enter the amount to withdraw : ");
     int wd = sc.nextInt();
+    sc.nextLine();
     if(wd%100!=0){
       System.out.println("Please enter amount in multiples of 100.");
       withdraw();
@@ -105,6 +128,7 @@ public class Main{
   public static void deposit(){
     System.out.print("Enter the amount to deposit : ");
     int dp = sc.nextInt();
+    sc.nextLine();
     if(dp%100!=0){
       System.out.println("Please enter amount in multiples of 100.");
       deposit();
@@ -119,7 +143,6 @@ public class Main{
 
   public static void changePin(){
     System.out.print("Authentication required.\nEnter your mobile no. : ");
-    sc.nextLine();
     String ph = sc.nextLine().trim();
     if(ph.equals(user.getPhone())){
       boolean validPin = false;
